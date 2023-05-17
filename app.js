@@ -40,8 +40,8 @@ app.post('/', checkUrlExists, (req, res) => {
   const originURL = req.body.originURL
   const shortURL = shortenFunc()
 
-  //先查詢網址是否存在於資料庫中(已有短網址)
-  Url.findOne({ url: originURL })
+  //先查詢網址是否存在於資料庫中(已有短網址) 也防止輸入短網址再產生一組短網址循環
+  Url.findOne({ $or: [{ url: originURL }, { shortUrl: originURL.slice(-5) }] })
     .then(data => {
       if (data) {
         return data
