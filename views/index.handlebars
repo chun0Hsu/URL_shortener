@@ -9,7 +9,10 @@
     {{#if shortUrl}}
     <div class="mt-5 mb-5">
       <h3 class="text-center">Success! Your shortURL :</h3>
-      <p class="text-center mt-4" style="color: blue;">{{host}}/{{shortUrl}}</p>
+      <p id="generatedURL" class="text-center mt-4" style="color: blue;">{{host}}/{{shortUrl}}</p>
+      <div class="text-center">
+        <button class="btn btn-primary" onclick="copy()">Copy</button>
+      </div>
     </div>
     {{else}}
     <div class="mt-5 mb-5">
@@ -22,3 +25,16 @@
     {{/if}}
   </div>
 </div>
+
+<script>
+  const copy = () => {
+    const generatedURL = document.getElementById('generatedURL')
+    navigator.clipboard.writeText(generatedURL.innerText)
+      .then(() => {
+        console.log('success');
+      })
+      .catch(error => {
+        console.error('error:', error);
+      });
+  }
+</script>
