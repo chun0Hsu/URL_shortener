@@ -56,7 +56,17 @@ app.post('/', checkUrlExists, (req, res) => {
 })
 
 app.get('/:shortUrl', (req, res) => {
-  
+  const { shortUrl } = req.params
+
+  Url.findOne({ shortUrl })
+    .then(data => {
+      if (data) {
+        res.redirect(data.url)
+      } else {
+        res.json({ error: 'URL does not exist' })
+      }
+    })
+    .catch(error => console.log(error))
 })
 
 app.listen(port, () => {
