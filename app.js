@@ -5,8 +5,8 @@ const db = require('./config/mongoose')
 const Url = require('./models/url')
 const shortenFunc = require('./shortenFunc')
 
-app = express()
-port = 3000
+const app = express()
+const port = 3000
 
 app.engine('handlebars', exphbs.engine({ default: "main" }))
 app.set('view engine', 'handlebars')
